@@ -1,46 +1,63 @@
-const rock = "rock";
-const scissors = "scissors";
-const paper = "paper";
-let randomChoice = Math.floor(Math.random() * 3);
-
-function computerPLay() {
+function computerPlay() {
+    let randomChoice = Math.floor(Math.random() * 3);
     switch (randomChoice) {
         case 0:
-            randomChoice = "rock"
-            break;
-
+            return computerChoice = "rock"
         case 1:
-            randomChoice = "paper"
-            break;
-
+            return computerChoice = "paper"
         case 2:
-            randomChoice = "scissors"
-            break;
+            return computerChoice = "scissors"
     }
 }
 
-computerPLay()
-
-const computerSelection = randomChoice;
-let playerImput = "scissoRS";
-const playerSelection = playerImput.toLowerCase();
-
-const draw = "draw";
-const win = `you win, ${playerSelection} beats ${computerSelection}`
-const lose = `you lose, ${computerSelection} beats ${playerSelection}`
-
-//scissors beats paper
-//paper beats rock
-//rock beats scissors
-
-function singleRound(a, b) {
-if (a === b) {return draw}
-if ((a === scissors && b === paper) || (a === paper && b === rock) || (a === rock && b === scissors)) {return lose}
-else {return win}
+function playerPlay() {
+    switch (playerImput) {
+        case "paper":
+            return PlayerChoice = "paper"
+        case "rock":
+            return PlayerChoice = "rock"
+        case "scissors":
+            return PlayerChoice = "scissors"
+        case "":
+        case "null":
+        default:
+            return PlayerChoice = "to not play"
+    }
 }
 
-singleRound(computerSelection, playerSelection)
-console.log (`computer chose ${computerSelection}`)
-console.log (`you chose ${playerSelection}`)
-console.log(singleRound(computerSelection, playerSelection))
+let PlayerChoice
+let computerChoice
+let playerImput;
+let draw = "draw";
+let playerScore = 0;
+let computerScore = 0;
 
+function singleRound(a, b) {
+    if (a === b) { return draw }
+    if ((a === "scissors" && b === "paper") || (a === "paper" && b === "rock") || (a === "rock" && b === "scissors") || b === "to not play") {
+        ++computerScore
+        let lose = `you lose, ${computerChoice} beats ${PlayerChoice}`;
+        return lose
+    }
+    else {
+        ++playerScore
+        let win = `you win, ${PlayerChoice} beats ${computerChoice}`;
+        return win
+    }
+}
+
+function game() {
+    for (i = 1; i <= 5; ++i) {
+        alert(`round ${i}`)
+        playerImput = String(prompt("rock, paper or scissors?")).toLowerCase();
+        console.log(`computer chose ${computerPlay()}`)
+        console.log(`you chose ${playerPlay()}`)
+        console.log(singleRound(computerChoice, PlayerChoice))
+        console.log(`computer: ${computerScore}, player: ${playerScore}`)
+    }
+    let finalScore = computerScore - playerScore;
+    if (finalScore > 0) { console.log("final result: you lost bro") }
+    else if (finalScore < 0) { console.log("final result: you won bro") }
+    else { console.log("final result: draw") }
+}
+game()
