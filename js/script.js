@@ -28,13 +28,13 @@ function playerPlay() {
 let PlayerChoice
 let computerChoice
 let playerImput;
-let draw = "draw";
 let playerScore = 0;
 let computerScore = 0;
 
-function singleRound(a, b) {
-    if (a === b) { return draw }
-    if ((a === "scissors" && b === "paper") || (a === "paper" && b === "rock") || (a === "rock" && b === "scissors") || b === "to not play") {
+function playSingleRound(a, b) {
+    if (a === b) { return "draw" }
+    if ((a === "scissors" && b === "paper") || (a === "paper" && b === "rock") ||
+        (a === "rock" && b === "scissors") || b === "to not play") {
         ++computerScore
         let lose = `you lose, ${computerChoice} beats ${PlayerChoice}`;
         return lose
@@ -46,13 +46,14 @@ function singleRound(a, b) {
     }
 }
 
-function game() {
+function playFiveRounds() {
     for (i = 1; i <= 5; ++i) {
         alert(`round ${i}`)
         playerImput = String(prompt("rock, paper or scissors?")).toLowerCase();
+
         console.log(`computer chose ${computerPlay()}`)
         console.log(`you chose ${playerPlay()}`)
-        console.log(singleRound(computerChoice, PlayerChoice))
+        console.log(playSingleRound(computerChoice, PlayerChoice))
         console.log(`computer: ${computerScore}, player: ${playerScore}`)
     }
     let finalScore = computerScore - playerScore;
@@ -60,4 +61,4 @@ function game() {
     else if (finalScore < 0) { console.log("final result: you won bro") }
     else { console.log("final result: draw") }
 }
-game()
+playFiveRounds()
