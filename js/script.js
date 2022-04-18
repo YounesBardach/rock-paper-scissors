@@ -1,3 +1,10 @@
+let PlayerChoice
+let computerChoice
+let playerScore = 0;
+let computerScore = 0;
+let buttons = document.querySelectorAll("#buttons");
+let result = document.querySelector('#result');
+
 function computerPlay() {
     let randomChoice = Math.floor(Math.random() * 3);
     switch (randomChoice) {
@@ -10,59 +17,30 @@ function computerPlay() {
     }
 }
 
-function playerPlay() {
-    switch (playerImput) {
-        case "paper":
-            return PlayerChoice = "paper"
-        case "rock":
-            return PlayerChoice = "rock"
-        case "scissors":
-            return PlayerChoice = "scissors"
-    }
-}
-
-let PlayerChoice
-let computerChoice
-let playerImput;
-let playerScore = 0;
-let computerScore = 0;
-
-function playSingleRound(player, computer) {
-    if (player === computer) { console.log("draw") }
+function playRound(player, computer) {
+    if (player === computer) { result.innerHTML = `You played ${player} and the computer played ${computer}<br>Draw` }
     else if ((player === "scissors" && computer === "paper") || (player === "paper" && computer === "rock") ||
         (player === "rock" && computer === "scissors")) {
         ++playerScore
-        let win = `you win, ${player} beats ${computer}`;
-        console.log(win)
+        result.innerHTML = `You played ${player} and the computer played ${computer}<br>You win, ${player} beats ${computer}`
     }
     else {
         ++computerScore
-        let lose = `you lose, ${computer} beats ${player}`;
-        console.log(lose)
+        result.innerHTML = `You played ${player} and the computer played ${computer}<br>You lose, ${computer} beats ${player}`
     }
+    result.innerHTML += `<br>Running score:<br>Player: ${playerScore}<br>Computer: ${computerScore}`
 }
 
-let buttons = document.querySelectorAll("#buttons");
-buttons.forEach(button => button.addEventListener("click", PlayerChoice => {
+buttons.forEach(button => button.addEventListener("click", () => {
     PlayerChoice = button.textContent
     computerPlay()
-    console.log(PlayerChoice, computerChoice)
-    playSingleRound(PlayerChoice, computerChoice)
+    playRound(PlayerChoice, computerChoice)
+    if (playerScore === 5) {
+        result.innerHTML += `<br>The winner is the player (reached 5 points first)`
+        buttons.forEach(button => button.style.cssText = "display: none;")
+    }
+    if (computerScore === 5) {
+        result.innerHTML += `<br>The winner is the computer (reached 5 points first)`
+        buttons.forEach(button => button.style.cssText = "display: none;")
+    }
 }))
-
-// function playFiveRounds() {
-//     for (i = 1; i <= 5; ++i) {
-//         alert(`round ${i}`)
-//         playerImput = String(prompt("rock, paper or scissors?")).toLowerCase();
-
-//         console.log(`computer chose ${computerPlay()}`)
-//         console.log(`you chose ${playerPlay()}`)
-//         console.log(playSingleRound(computerChoice, PlayerChoice))
-//         console.log(`computer: ${computerScore}, player: ${playerScore}`)
-//     }
-//     let finalScore = computerScore - playerScore;
-//     if (finalScore > 0) { console.log("final result: you lost bro") }
-//     else if (finalScore < 0) { console.log("final result: you won bro") }
-//     else { console.log("final result: draw") }
-// }
-// playFiveRounds()
