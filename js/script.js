@@ -18,10 +18,6 @@ function playerPlay() {
             return PlayerChoice = "rock"
         case "scissors":
             return PlayerChoice = "scissors"
-        case "":
-        case "null":
-        default:
-            return PlayerChoice = "to not play"
     }
 }
 
@@ -31,34 +27,42 @@ let playerImput;
 let playerScore = 0;
 let computerScore = 0;
 
-function playSingleRound(a, b) {
-    if (a === b) { return "draw" }
-    if ((a === "scissors" && b === "paper") || (a === "paper" && b === "rock") ||
-        (a === "rock" && b === "scissors") || b === "to not play") {
-        ++computerScore
-        let lose = `you lose, ${computerChoice} beats ${PlayerChoice}`;
-        return lose
+function playSingleRound(player, computer) {
+    if (player === computer) { console.log("draw") }
+    else if ((player === "scissors" && computer === "paper") || (player === "paper" && computer === "rock") ||
+        (player === "rock" && computer === "scissors")) {
+        ++playerScore
+        let win = `you win, ${player} beats ${computer}`;
+        console.log(win)
     }
     else {
-        ++playerScore
-        let win = `you win, ${PlayerChoice} beats ${computerChoice}`;
-        return win
+        ++computerScore
+        let lose = `you lose, ${computer} beats ${player}`;
+        console.log(lose)
     }
 }
 
-function playFiveRounds() {
-    for (i = 1; i <= 5; ++i) {
-        alert(`round ${i}`)
-        playerImput = String(prompt("rock, paper or scissors?")).toLowerCase();
+let buttons = document.querySelectorAll("#buttons");
+buttons.forEach(button => button.addEventListener("click", PlayerChoice => {
+    PlayerChoice = button.textContent
+    computerPlay()
+    console.log(PlayerChoice, computerChoice)
+    playSingleRound(PlayerChoice, computerChoice)
+}))
 
-        console.log(`computer chose ${computerPlay()}`)
-        console.log(`you chose ${playerPlay()}`)
-        console.log(playSingleRound(computerChoice, PlayerChoice))
-        console.log(`computer: ${computerScore}, player: ${playerScore}`)
-    }
-    let finalScore = computerScore - playerScore;
-    if (finalScore > 0) { console.log("final result: you lost bro") }
-    else if (finalScore < 0) { console.log("final result: you won bro") }
-    else { console.log("final result: draw") }
-}
-playFiveRounds()
+// function playFiveRounds() {
+//     for (i = 1; i <= 5; ++i) {
+//         alert(`round ${i}`)
+//         playerImput = String(prompt("rock, paper or scissors?")).toLowerCase();
+
+//         console.log(`computer chose ${computerPlay()}`)
+//         console.log(`you chose ${playerPlay()}`)
+//         console.log(playSingleRound(computerChoice, PlayerChoice))
+//         console.log(`computer: ${computerScore}, player: ${playerScore}`)
+//     }
+//     let finalScore = computerScore - playerScore;
+//     if (finalScore > 0) { console.log("final result: you lost bro") }
+//     else if (finalScore < 0) { console.log("final result: you won bro") }
+//     else { console.log("final result: draw") }
+// }
+// playFiveRounds()
