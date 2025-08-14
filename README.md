@@ -9,10 +9,10 @@
 A simple Rock Paper Scissors game built with vanilla JavaScript for The Odin
 Project.
 
-</div>
-
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=000)
 ![Status: Learning Project](https://img.shields.io/badge/Status-Learning%20Project-00b894)
+
+</div>
 
 ## About
 
